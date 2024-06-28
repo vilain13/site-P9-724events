@@ -7,21 +7,21 @@ import "./style.scss";
 const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
-  const byDateDesc = data?.focus.sort((evtA, evtB) =>
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
-  );
+  const byDateDesc = data?.focus.sort((evtA, evtB) => 
+    new Date(evtA.date) > new Date(evtB.date) ? -1 : 1 // modification de l'ordre de tri > au lieu de < pour avoir un ordre décroissant
+  ); 
   const nextCard = () => {
-    setTimeout(
-      () => setIndex(index < byDateDesc.length ? index + 1 : 0),
-      5000
-    );
+    if (byDateDesc) {  // ajout du test pour éléminer le warning sur l'élémént non défini
+      setTimeout( () => setIndex(index < byDateDesc.length-1 ? index + 1 : 0),  5000 // modification du test sur nombre enregistrements maxi à afficher en tenant compte id démarre à 0 et pas 1
+      );
+    }
   };
   useEffect(() => {
     nextCard();
-  });
+  }, [index, byDateDesc]); // Ajout des dépendances dans hook useEffect
   return (
     <div className="SlideCardList">
-      {byDateDesc?.map((event, idx) => (
+      {byDateDesc?.map((event, idx) => ( 
         <>
           <div
             key={event.title}
@@ -42,10 +42,11 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                  key={_.date} // changemnent de clé unique 
                   type="radio"
                   name="radio-button"
-                  checked={idx === radioIdx}
+                  checked={index === radioIdx} // remplacement idx par index pour indiquer la position de l'image affichée
+                  readOnly // ajout pour éviter que l'utilisateur  modifier le bouton radio
                 />
               ))}
             </div>
