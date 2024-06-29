@@ -16,9 +16,9 @@ const Select = ({
   const [value, setValue] = useState();
   const [collapsed, setCollapsed] = useState(true);
   const changeValue = (newValue) => {
-    onChange();
+    onChange(newValue);  // Ajout du paramètre newValue
     setValue(newValue);
-    setCollapsed(newValue);
+    setCollapsed(true); // Remplacement de l'argument newValue par true pour fermer automatiquemeent la collapse après la selection d'un element même si "Toutes" est sélectionné
   };
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
