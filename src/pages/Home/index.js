@@ -14,8 +14,11 @@ import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
   const {data} = useData(); // data remplace last initialement saisi
-  const last = data ? data.events[data.events.length - 1] : null ; // mise à jour de la ternaire pour extraire le dernier évènement du tableau
   
+  const last = data && data.events.length > 0 
+  ? data.events.sort((a, b) => new Date(b.date) - new Date(a.date))[0] // récupérer la date la plus récente des évènements pour affichage dernier évènement dans le footer premier event d'un tri descendant
+  : null;
+
   return <>
     <header>
       <Menu />
