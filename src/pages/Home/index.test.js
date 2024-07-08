@@ -33,7 +33,7 @@ describe("When a page is created", () => {
     // to implement
   })
   it("a list a people is displayed", () => {
-    // to implement
+   // to implement
   })
   it("a footer is displayed", () => {
     // to implement
