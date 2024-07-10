@@ -123,10 +123,10 @@ const Page = () => {
         <h3>Notre derniére prestation</h3>
         {last && (   // si l'objet last est définie et  non nul
         <EventCard
-          imageSrc={last.cover} // affichage de l'img de l'objet last défini précedemment
-          title={last.title} // affichage du titre  de l'objet last défini précedemment
-          date={new Date(last.date)} // affichage de la date  de l'objet last défini précedemment
-          small label={last.type} // affichage du type  de l'objet last défini précedemment
+          imageSrc={last?.cover} // affichage de l'img de l'objet last défini précedemment
+          title={last?.title} // affichage du titre  de l'objet last défini précedemment
+          date={new Date(last?.date)} // affichage de la date  de l'objet last défini précedemment
+          small label={last?.type} // affichage du type  de l'objet last défini précedemment
         />
         )}
       </div>
